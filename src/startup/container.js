@@ -2,7 +2,6 @@
 
 const { createContainer, asClass, asValue, asFunction } = require("awilix");
 
-
 //Configuraciones
 const config = require("../config");
 const app = require(".");
@@ -23,6 +22,13 @@ const { User } = require("../models");
 //crear contenedor
 const container = createContainer();
 
+//Repositorios
+const {
+  UserRepository,
+  IdeaRepository,
+  CommentRepository,
+} = require("../repositories");
+
 //crear una nueva clase de inyección
 container
   .register({
@@ -36,8 +42,14 @@ container
   .register({
     HomeController: asClass(HomeController.bind(HomeController)).singleton(),
   })
-  .register({ HomeRoutes: asFunction(HomeRoutes).singleton() }).register({ 
-    User: asValue(User)
+  .register({ HomeRoutes: asFunction(HomeRoutes).singleton() })
+  .register({
+    User: asValue(User),
+  })
+  .register({
+    UserRepository: asClass(UserRepository).singleton(),
+    IdeaRepository: asClass(IdeaRepository).singleton(),
+    CommentRepository: asClass(CommentRepository).singleton(),
   });
 
 module.exports = container;
