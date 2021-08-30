@@ -19,15 +19,17 @@ const Routes = require("../routes");
 // models
 const { User } = require("../models");
 
-//crear contenedor
-const container = createContainer();
-
 //Repositorios
 const {
   UserRepository,
   IdeaRepository,
-  CommentRepository,
-} = require("../repositories");
+  CommentRepository
+} = require("../repository");
+
+
+//crear contenedor
+const container = createContainer();
+
 
 //crear una nueva clase de inyección
 container
